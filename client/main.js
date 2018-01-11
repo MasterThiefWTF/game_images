@@ -3,33 +3,6 @@ import { ReactiveVar } from 'meteor/reactive-var';
 
 import './main.html';
 
-/*var img_data = [
-    {
-        img_src: '/p5.jpg',
-        game_title: 'Black Desert Online',
-        game_genre: 'MMO',
-        game_price: '$9.99'
-    },
-    {
-        img_src: '/p7.jpg',
-        game_title: 'Dark Souls III',
-        game_genre: 'RPG',
-        game_price: '$59.99'
-    },
-    {
-        img_src: '/p9.jpg',
-        game_title: 'Garrys Mod',
-        game_genre: 'Indie',
-        game_price: '$9.99'
-    },
-    {
-        img_src: '/p11.jpg',
-        game_title: 'Watch Dogs 2',
-        game_genre: 'Action',
-        game_price: '$59.99'
-    },
-];*/
-
 Template.images.helpers({images:Images.find()});
 
 //Template.images.helpers({images:img_data});
@@ -68,6 +41,20 @@ Template.images.events({
                 }
             }
         });
+    },
+    'click .editData':function(e){
+        $('#myEdit').modal('show');
+    }
+});
+
+Template.addForm.events({
+  'submit .addData' : function (e) {
+      e.preventDefault();
+      Images.insert({
+        game_title: $(".name").val(),
+        game_genre: $(".genre").val(),
+        game_price: $(".price").val(),
+      });
     }
 });
 

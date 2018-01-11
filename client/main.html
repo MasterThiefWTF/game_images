@@ -7,21 +7,13 @@
 </head>
 
 <body>
-  <h2 align="center">Game Images</h2>
+  <h2 align="center">Game Data</h2>
+  
+  {{> addForm}}
   {{> images}}
+  
 <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/foundation/5.5.3/js/foundation.min.js"></script>
-<script>
-    $(document).foundation();
-    function smallImg(x){
-        x.style.height="75%";
-        x.style.width="75%";
-    }
-    function normalImg(x){
-        x.style.height="100%";
-        x.style.width="100%";
-    }
-</script>   
 </body>
 
 <template name="images">
@@ -30,13 +22,50 @@
 <div class="row">
 {{#each images}}
 <div class="large-3 small-6 columns" id="{{_id}}">
-<img onmouseover="smallImg(this)" onmouseout="normalImg(this)" src="{{img_src}}" height="100%" width="100%">
 <h6 class="panel">Name : {{game_title}}<br>Genre : {{game_genre}}<br>Price : {{game_price}}</h6>
+<button class="editData btn btn-warning" data-toggle="edit" data-target="#myEdit">Edit</button>    
 <button class="js-del-image btn btn-warning">Delete</button>
 </div>
 {{/each}}
 </div>
 </div>
 </div>
+{{> editForm}}
 </template>
 
+<template name="addForm">
+    <div class="row addData">
+        <div class="panel col-md-6">
+            <form>
+                <h3>Name</h3><input type="text" name="name" class="name">
+                <h3>Genre</h3><input type="text" name="genre" class="genre">
+                <h3>Price</h3><input type="text" name="price" class="price">
+                <button class="btn btn-warning">Add</button>
+            </form>
+        </div>
+    </div>    
+</template>
+
+<template name="editForm">
+<div id="myEdit" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Edit</h4>
+      </div>
+      <div class="modal-body">
+            <form>
+                <h5>Name</h5><input type="text" name="name" class="name">
+                <h5>Genre</h5><input type="text" name="genre" class="genre">
+                <h5>Price</h5><input type="text" name="price" class="price">
+            </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-warning" data-dismiss="modal">Accept</button>
+      </div>
+    </div>
+
+  </div>
+</div>
+</template>
